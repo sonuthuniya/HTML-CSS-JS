@@ -1,0 +1,100 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: beige;
+}
+
+.scroll{
+    margin-top: 25%;
+    width: 100%;
+    mask-image: linear-gradient(to right, transparent, #111 10% 90%, transparent);
+}
+
+.scrollAni{
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    margin-left: 10px;
+    animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll{
+    to{
+        transform: translateX(-50%);
+    }
+}
+
+.item{
+    height: 160px;
+    width: 180px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.item img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.scroll:hover .item img{
+    filter: grayscale(0.8);
+}
+
+.item:hover img{
+    filter: grayscale(0) !important;
+    transform: scale(1.02);
+}
+
+.scroll:hover .scrollAni,
+.scroll:focus-within .scrollAni{
+    animation-play-state: paused;
+}
+
+/* respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce){
+    .scrollAni{
+        animation: none;
+    }
+}
+
+/* responsive design */
+@media (max-width: 768px){
+    .scroll{
+        width: 90%;
+    }
+
+    .item{
+        width: 120px;
+        height: 160px;
+        border-radius: 12px;
+        margin-right: 12px;
+    }
+}
+
+@media (max-width: 480px){
+    .scroll{
+        width: 100%;
+        mask-image: linear-gradient(to right, transparent, #111 5% 95%, transparent);
+    }
+
+    .item{
+        width: 120px;
+        height: 90px;
+        border-radius: 18px;
+        margin-right: 10px;
+    }
+
+    .scrollAni{
+        animation-duration: 14s;
+    }
+}
